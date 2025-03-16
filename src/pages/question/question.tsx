@@ -2,7 +2,12 @@ import React from 'react'
 
 function Question() {
   return (
-    <div>Question</div>
+    <div>
+      Category: ????? <br />
+      Difficulty: ????? <br />
+      Type: ????? <br />
+      Amount: ????? <br />
+    </div>
   )
 }
 
