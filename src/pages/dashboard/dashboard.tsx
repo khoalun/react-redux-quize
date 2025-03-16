@@ -14,25 +14,25 @@ function Dashboard() {
       <form onSubmit={onSubmit}>
         <label htmlFor="category">Category</label>
         <select name="category">
-          <option>Entertainment: Film</option>
-          <option>Entertainment: Music</option>
+          <option value="Entertainment: Film">Entertainment: Film</option>
+          <option value="Entertainment: Music">Entertainment: Music</option>
         </select>
         
         <br />
 
         <label htmlFor="difficulty">Difficulty</label>
         <select name="difficulty">
-          <option>Easy</option>
-          <option>Medium</option>
-          <option>Hard</option>
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
         </select>
 
         <br />
 
         <label htmlFor="type">Type</label>
         <select name="type">
-          <option>Multiple  Choice</option>
-          <option>True/False</option>
+          <option value="multiple">Multiple  Choice</option>
+          <option value="boolean">True/False</option>
         </select>
 
         <br />
