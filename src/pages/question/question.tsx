@@ -8,7 +8,7 @@ function Question() {
   const formData = useSelector((state: RootState) => state.form);
   console.log('formData', formData)
   return (
-    <div>
+    <div style={{textAlign: 'left', marginLeft:'20px'}}>
       <h2>Quiz Information</h2>
       <p>Category: {formData.category}</p>
       <p>Difficulty: {formData.difficulty}</p>
