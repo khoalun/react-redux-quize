@@ -8,7 +8,7 @@ function MainLayout({ children }: React.PropsWithChildren) {
         <Link to="/" style={{ color: '#fff', textDecoration: 'none' }}>
           <div className="header-title">Quiz App</div>
         </Link>
-        <a href="/leaderboard" className="header-link">LEADER BOARD</a>
+        <Link to="/leaderboard" className="header-link">LEADER BOARD</Link>
       </header>
 
       <div className="container">

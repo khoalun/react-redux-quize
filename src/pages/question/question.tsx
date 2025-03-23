@@ -7,6 +7,9 @@ import { RootState } from '../../redux/types';
 import Button from '@mui/material/Button/Button';
 import { Box, Typography } from '@mui/material';
 import { updateScore } from '../../redux/actions/leaderBoardActions';
+import { DIFFICULTY_TIME } from '../../configs';
+import { formatTimer } from '../../utils/formatTimer';
+import { randomPositionAnwser } from '../../utils/randomPositionAnwser';
 
 interface IDataQuestion {
   type: string,
@@ -26,8 +29,7 @@ function Question() {
   const [answers, setAnswers] = React.useState<string[]>([]);
   const [dataSource, setDataSource] = React.useState<IDataQuestion[]>([]);
   const [score, setScore] = React.useState(0);
-
-  // https://opentdb.com/api.php?amount=10&category=10&difficulty=medium&type=multiple
+  const [countTime, setCountTime] = React.useState(DIFFICULTY_TIME[formData.difficulty || 'easy']);
 
   React.useEffect(() => {
     const { category, difficulty, type, amount } = formData;
@@ -47,7 +49,7 @@ function Question() {
       const question = dataSource[questionIndex] as IDataQuestion;
       const options = [...question.incorrect_answers];
       options.splice(
-        Math.floor(Math.random() * 4),
+        randomPositionAnwser(formData.type),
         0,
         question.correct_answer
       )
@@ -57,6 +59,27 @@ function Question() {
     }
     fetchQuestions(); 
   }, [formData]) 
+
+  // count timer
+  React.useEffect(() => {
+    if (answers.length === 0) return;
+    
+    const timer = setInterval(() => {
+      setCountTime(prevState => {
+        if(prevState > 0) {
+          return prevState - 1
+        }
+        // auto random anwser and next question
+        const content = answers[randomPositionAnwser(formData.type)]; 
+        handleAnswer(content);
+        return DIFFICULTY_TIME[formData.difficulty];
+      })
+    }, 1000);
+
+    return () => {
+      clearInterval(timer);
+    }
+  }, [answers])
   
   // next question
   React.useEffect(() => {
@@ -65,7 +88,7 @@ function Question() {
     const question = dataSource[questionIndex] as IDataQuestion;
     const options = [...question.incorrect_answers];
       options.splice(
-        Math.floor(Math.random() * 4),
+        randomPositionAnwser(formData.type),
         0,
         question.correct_answer
       )
@@ -74,6 +97,11 @@ function Question() {
 
   function handleAnswer(answer: string) {
     const question = dataSource[questionIndex];
+
+    console.log('answer: ', {
+      answer,
+      correct_answer: question.correct_answer
+    })
 
     if (answer === question.correct_answer) {
       setScore(prevState => {
@@ -91,7 +119,6 @@ function Question() {
 
     setQuestionIndex(prevState => prevState + 1)
   }
-
 
   return (
     <>
@@ -122,8 +149,14 @@ function Question() {
         <Typography>
           Score: {score}/{dataSource.length}
         </Typography>
-        <Typography>
-          Timer: 0:10
+        <Typography
+          sx={{
+            color: countTime < 10 ? 'red' : 'black',
+            // opacity: countTime < 10 ? 0.1 : 1,
+            // transition: 'all .5s linear'
+          }}
+        >
+          Timer: {formatTimer(countTime)}
         </Typography>
       </Box>
 
