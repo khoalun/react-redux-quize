@@ -3,10 +3,10 @@ import { FormState } from '../types';
 import { FormActionTypes } from '../actions/formActions';
 
 const initialState: FormState = {
-  category: 'Entertainment: Film',
-  difficulty: 'easy',
-  type: 'multiple',
-  amount: '10'
+  category: '',
+  difficulty: '',
+  type: '',
+  amount: 0
 };
 
 

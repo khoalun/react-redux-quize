@@ -15,14 +15,14 @@ export interface ResetFormDataAction {
 export type FormActionTypes = UpdateFormDataAction | ResetFormDataAction;
 
 
-export const updateFormData = (data: Partial<FormState>): UpdateFormDataAction => {
+export const updateFormData = (data: FormState) => {
   return {
     type: UPDATE_FORM_DATA,
     payload: data
   };
 };
 
-export const resetFormData = (): ResetFormDataAction => {
+export const resetFormData = () => {
   return {
     type: RESET_FORM_DATA
   };
