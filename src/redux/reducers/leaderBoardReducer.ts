@@ -14,7 +14,7 @@ const leaderBoardReducer = (
     case UPDATE_SCORE:
       return {
         ...state,
-        score: state.score + action.payload
+        score: action.payload
       };
     case UPDATE_USER:
       return {

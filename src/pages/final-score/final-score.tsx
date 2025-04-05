@@ -21,6 +21,8 @@ function FinalScore() {
     dispatch(updateUser(user));
     navigate('/leaderboard')
   }
+
+  console.log("score: ", score)
  
   return (
     <>

@@ -97,17 +97,10 @@ function Question() {
 
   function handleAnswer(answer: string) {
     const question = dataSource[questionIndex];
-
-    console.log('answer: ', {
-      answer,
-      correct_answer: question.correct_answer
-    })
-
     if (answer === question.correct_answer) {
       setScore(prevState => {
-        const newScore = prevState + 1;
-        dispatch(updateScore(newScore));
-
+        const newScore = prevState + 1; 
+        dispatch(updateScore(newScore)); 
         return newScore
       });
     }
